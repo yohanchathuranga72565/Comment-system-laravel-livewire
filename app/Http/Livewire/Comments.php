@@ -6,17 +6,18 @@ use Livewire\Component;
 
 use Carbon\Carbon;
 
+use App\Comment;
+
 class Comments extends Component
 {
-    public $comments = [
-        [
-            'body'=> 'Lorunm text. hi I am yohan this is a wrong thing. now I am going to learn larave livewire..good luck. keep it up',
-            'created_at'=> '3 min ago',
-            'creator'=> 'Sarthak'
-        ]
-    ];
+    public $comments = [];
 
     public $newComment;
+
+    public function mount(){
+        $initialComments = Comment::all();
+        $this->comments = $initialComments;
+    }
 
     public function addComment(){
 
