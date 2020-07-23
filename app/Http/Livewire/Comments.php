@@ -8,16 +8,15 @@ use Carbon\Carbon;
 
 use App\Comment;
 
+use Livewire\WithPagination;
+
 class Comments extends Component
 {
-    public $comments = [];
-
+    
+    use WithPagination;
     public $newComment;
 
-    public function mount(){
-        $initialComments = Comment::latest()->get();
-        $this->comments = $initialComments;
-    }
+    
 
     public function updated($name, $value)
     {
@@ -29,7 +28,7 @@ class Comments extends Component
         $this->validate(['newComment'=>'required|max:255']);
 
         $createdComment = Comment::create(['body'=> $this->newComment,'user_id'=>1]);
-        $this->comments->prepend($createdComment);
+        // $this->comments->prepend($createdComment);
         $this->newComment="";
 
         session()->flash('message', 'Comment added successfully..!');
@@ -38,7 +37,7 @@ class Comments extends Component
     public function remove($commentId){
         $comment = Comment::find($commentId);
         $comment->delete();
-        $this->comments = $this->comments->except($commentId);
+        // $this->comments = $this->comments->except($commentId);
         // dd($comment);
         session()->flash('messagedel', 'Comment deleted successfully..!');
     }
@@ -46,7 +45,9 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.comments');
+        return view('livewire.comments', [
+            'comments' => Comment::latest()->paginate(2)
+        ]);
     }
 
 }

@@ -29,8 +29,9 @@
                     <i class="fa fa-times text-red-200 hover:text-red-600" wire:click="remove({{$comment->id}})"></i>
                 </div>
                 <p class="text-gray-800">{{$comment->body}}</p>
-            </div>
-            
+            </div>  
         @endforeach
+
+        {{$comments->links()}}
     </div>  
 </div>
