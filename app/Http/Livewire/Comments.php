@@ -9,19 +9,29 @@ use Carbon\Carbon;
 use App\Comment;
 
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 class Comments extends Component
 {
     
     use WithPagination;
+    use WithFileUploads;
     public $newComment;
+
+    public $image;
+
+    protected $listeners = ['fileUpload' => 'handleFileUpload'];
+
+    public function handleFileUpload($imageData){
+        $this->image = $imageData;
+    }
 
     
 
-    public function updated($name, $value)
-    {
-        $this->validate(['newComment'=>'required|max:255']);
-    }
+    // public function updated($name, $value)
+    // {
+    //     $this->validate(['newComment'=>'required|max:255']);
+    // }
 
     public function addComment(){
 
