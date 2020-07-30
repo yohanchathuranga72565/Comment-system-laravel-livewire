@@ -23,7 +23,17 @@ class Comments extends Component
 
     public $image;
 
-    protected $listeners = ['fileUpload' => 'handleFileUpload'];
+    public $ticketId;
+
+    protected $listeners = [
+        'fileUpload' => 'handleFileUpload',
+        'ticketSelected',
+    
+    ];
+
+    public function ticketSelected($ticketId){
+        $this->ticketId = $ticketId;
+    }
 
     public function handleFileUpload($imageData){
         $this->image = $imageData;
@@ -40,7 +50,7 @@ class Comments extends Component
         $this->validate(['newComment'=>'required|max:255']);
         $image = $this->storeImage();
 
-        $createdComment = Comment::create(['body'=> $this->newComment,'user_id'=>1,'image'=> $image]);
+        $createdComment = Comment::create(['body'=> $this->newComment,'user_id'=>1,'image'=> $image,'support_ticket_id'=>$this->ticketId]);
         // $this->comments->prepend($createdComment);
         $this->newComment="";
 
@@ -73,7 +83,7 @@ class Comments extends Component
     public function render()
     {
         return view('livewire.comments', [
-            'comments' => Comment::latest()->paginate(2)
+            'comments' => Comment::where('support_ticket_id',$this->ticketId)->latest()->paginate(2)
         ]);
     }
 

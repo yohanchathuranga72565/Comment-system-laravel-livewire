@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-    <div class="w-6/12">
+    <div class="w-10/12">
         <h1 class="my-10 text-3xl">Comments</h1>
         @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         <div>
