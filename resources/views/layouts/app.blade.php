@@ -11,11 +11,15 @@
     <script src="{{asset('js/app.js')}}"></script>
 </head>
 <body class="flex flex-wrap justify-center">
-    <div class="flex w-full justify-left px-4 bg-purple-900 text-white">
+    <div class="flex w-full justify-between px-4 bg-purple-900 text-white">
         <a href="/" class="mx-3 py-4">Home</a>
-        <a href="/login" class="mx-3 py-4">Login</a>
+        <div class="py-4">
+            <a href="/login" class="mx-3 ">Login</a>
+            <a href="/register" class="mx-3 ">Register</a>
+        </div>
+        
     </div>
-    <div class="my-10 flex justify-center">
+    <div class="my-10 w-full flex justify-center">
         @yield('content')
     </div>
 </body>
