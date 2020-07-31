@@ -6,5 +6,7 @@
     <div class="w-7/12 mx-2 rounded border p-2">
         <livewire:comments/>
     </div>
-</div>  
+</div>
+
+
 

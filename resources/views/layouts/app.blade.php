@@ -11,14 +11,21 @@
     <script src="{{asset('js/app.js')}}"></script>
 </head>
 <body class="flex flex-wrap justify-center">
-    <div class="flex w-full justify-between px-4 bg-purple-900 text-white">
-        <a href="/" class="mx-3 py-4">Home</a>
-        <div class="py-4">
-            <a href="/login" class="mx-3 ">Login</a>
-            <a href="/register" class="mx-3 ">Register</a>
+
+        <div class="flex w-full justify-between px-4 bg-purple-900 text-white">
+
+            @auth
+                <a href="/" class="mx-3 py-4">Home</a>
+                <livewire:logout />
+            @endauth
+            @guest
+                <div class="py-4">
+                    <a href="/login" class="mx-3 ">Login</a>
+                    <a href="/register" class="mx-3 ">Register</a>
+                </div>
+            @endguest
         </div>
-        
-    </div>
+
     <div class="my-10 w-full flex justify-center">
         @yield('content')
     </div>
